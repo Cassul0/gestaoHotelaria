@@ -17,10 +17,7 @@ public class PaymentService {
 	}
 	
 	public Payment generateCheckoutPayment(Reservation reservation) {
-		Long[] dayCount = reservation.getDayCount();
-		boolean isWeekend = reservation.isActualCheckoutWeekendDay();
-		
-		Payment payment = new Payment(reservation, dayCount, isWeekend);
+		Payment payment = new Payment(reservation, reservation.getDayCount(), reservation.isCheckoutLate(), reservation.isActualCheckoutWeekendDay());
 		
 		this.savePayment(payment);
 		

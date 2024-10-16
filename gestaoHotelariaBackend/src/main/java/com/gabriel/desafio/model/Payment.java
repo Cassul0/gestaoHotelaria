@@ -1,6 +1,5 @@
 package com.gabriel.desafio.model;
 
-import java.util.Calendar;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,11 +35,11 @@ public class Payment {
     	this.total = total;
     }
     
-    public Payment(Reservation reservation, Long[] dayCount, boolean isWeekend) {
+    public Payment(Reservation reservation, Long[] dayCount, boolean isCheckoutLate, boolean isWeekend) {
     	this.reservation = reservation;
     	this.dailyValue = this.getDailyValueFromCheckoutReservation(dayCount);
-    	this.parkingFee = this.getParkingSlotFee(dayCount);
-    	this.lateCheckoutFee = this.getLateCheckoutFee(isWeekend);
+    	this.parkingFee = reservation.getParkingSlot() ? this.getParkingSlotFee(dayCount) : 0;
+    	this.lateCheckoutFee = isCheckoutLate ? this.getLateCheckoutFee(isWeekend) : 0;
     	this.total = this.dailyValue + this.parkingFee + this.lateCheckoutFee;
     }
     
@@ -91,7 +90,17 @@ public class Payment {
 	public void setTotal(Double total) {
 		this.total = total;
 	}
-    
+	
+	@Override
+	public String toString() {
+		return "{id=" + id + ", "
+				+ "reservation=" + reservation + ", "
+				+ "dailyValue=" + dailyValue + ", "
+				+ "parkingFee=" + parkingFee + ", "
+				+ "lateCheckoutFee=" + lateCheckoutFee + ", "
+				+ "total=" + total + "}";
+	}
+
 	public Double getDailyValueFromCheckoutReservation(Long[] dayCount ) {
 		return WEEK_DAILY_VALUE * dayCount[0] + WEEKEND_DAILY_VALUE * dayCount[1];
 	}

@@ -1,6 +1,5 @@
 package com.gabriel.desafio.dto;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 import com.gabriel.desafio.model.Guest;
@@ -10,10 +9,10 @@ public class ReservationDTO {
 
 	private Long id;
 	private Guest guest;
-	private Date expectedCheckinDate;
-	private Date expectedCheckoutDate;
-	private Date actualCheckinDate;
-	private Date actualCheckoutDate;
+	private LocalDateTime expectedCheckinDate;
+	private LocalDateTime expectedCheckoutDate;
+	private LocalDateTime actualCheckinDate;
+	private LocalDateTime actualCheckoutDate;
 	private Double dailyValue;
 	private Integer days;
 	private Boolean parkingSlot;
@@ -34,34 +33,34 @@ public class ReservationDTO {
 		this.guest = guest;
 	}
 	
-	public Date getExpectedCheckinDate() {
+	public LocalDateTime getExpectedCheckinDate() {
 		return expectedCheckinDate;
 	}
 	
-	public void setExpectedCheckinDate(Date expectedCheckinDate) {
+	public void setExpectedCheckinDate(LocalDateTime expectedCheckinDate) {
 		this.expectedCheckinDate = expectedCheckinDate;
 	}
 	
-	public Date getExpectedCheckoutDate() {
+	public LocalDateTime getExpectedCheckoutDate() {
 		return expectedCheckoutDate;
 	}
 	
-	public void setExpectedCheckoutDate(Date expectedCheckoutDate) {
+	public void setExpectedCheckoutDate(LocalDateTime expectedCheckoutDate) {
 		this.expectedCheckoutDate = expectedCheckoutDate;
 	}
-	public Date getActualCheckinDate() {
+	public LocalDateTime getActualCheckinDate() {
 		return actualCheckinDate;
 	}
 	
-	public void setActualCheckinDate(Date actualCheckinDate) {
+	public void setActualCheckinDate(LocalDateTime actualCheckinDate) {
 		this.actualCheckinDate = actualCheckinDate;
 	}
 	
-	public Date getActualCheckoutDate() {
+	public LocalDateTime getActualCheckoutDate() {
 		return actualCheckoutDate;
 	}
 	
-	public void setActualCheckoutDate(Date actualCheckoutDate) {
+	public void setActualCheckoutDate(LocalDateTime actualCheckoutDate) {
 		this.actualCheckoutDate = actualCheckoutDate;
 	}
 	

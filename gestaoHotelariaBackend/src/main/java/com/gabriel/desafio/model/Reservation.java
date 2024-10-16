@@ -1,7 +1,7 @@
 package com.gabriel.desafio.model;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,18 +17,18 @@ public class Reservation {
 	private Long id;
 	@ManyToOne
 	private Guest guest;
-	private Date expectedCheckinDate;
-	private Date expectedCheckoutDate;
-	private Date actualCheckinDate;
-	private Date actualCheckoutDate;
+	private LocalDateTime expectedCheckinDate;
+	private LocalDateTime expectedCheckoutDate;
+	private LocalDateTime actualCheckinDate;
+	private LocalDateTime actualCheckoutDate;
 	private Double dailyValue;
 	private Integer days;
 	private Boolean parkingSlot;
 	
 	public Reservation() { }
 	
-	public Reservation(Guest guest, Date expectedCheckinDate, Date expectedCheckoutDate, Date actualCheckinDate, 
-					   Date actualCheckoutDate, Double dailyValue, Integer days, Boolean parkingSlot) {
+	public Reservation(Guest guest, LocalDateTime expectedCheckinDate, LocalDateTime expectedCheckoutDate, LocalDateTime actualCheckinDate, 
+					   LocalDateTime actualCheckoutDate, Double dailyValue, Integer days, Boolean parkingSlot) {
 		this.guest = guest;
 		this.expectedCheckinDate = expectedCheckinDate;
 		this.expectedCheckoutDate = expectedCheckoutDate;
@@ -55,34 +55,34 @@ public class Reservation {
 		this.guest = guest;
 	}
 	
-	public Date getExpectedCheckinDate() {
+	public LocalDateTime getExpectedCheckinDate() {
 		return expectedCheckinDate;
 	}
 	
-	public void setExpectedCheckinDate(Date expectedCheckinDate) {
+	public void setExpectedCheckinDate(LocalDateTime expectedCheckinDate) {
 		this.expectedCheckinDate = expectedCheckinDate;
 	}
 	
-	public Date getExpectedCheckoutDate() {
+	public LocalDateTime getExpectedCheckoutDate() {
 		return expectedCheckoutDate;
 	}
 	
-	public void setExpectedCheckoutDate(Date expectedCheckoutDate) {
+	public void setExpectedCheckoutDate(LocalDateTime expectedCheckoutDate) {
 		this.expectedCheckoutDate = expectedCheckoutDate;
 	}
-	public Date getActualCheckinDate() {
+	public LocalDateTime getActualCheckinDate() {
 		return actualCheckinDate;
 	}
 	
-	public void setActualCheckinDate(Date actualCheckinDate) {
+	public void setActualCheckinDate(LocalDateTime actualCheckinDate) {
 		this.actualCheckinDate = actualCheckinDate;
 	}
 	
-	public Date getActualCheckoutDate() {
+	public LocalDateTime getActualCheckoutDate() {
 		return actualCheckoutDate;
 	}
 	
-	public void setActualCheckoutDate(Date actualCheckoutDate) {
+	public void setActualCheckoutDate(LocalDateTime actualCheckoutDate) {
 		this.actualCheckoutDate = actualCheckoutDate;
 	}
 	
@@ -111,17 +111,14 @@ public class Reservation {
 	}
 	
 	public Long[] getDayCount() {
-		Calendar startDate = Calendar.getInstance();
-		Calendar endDate = Calendar.getInstance();
+		LocalDateTime startDate = this.actualCheckinDate;
+		LocalDateTime endDate = this.actualCheckoutDate;
 		Long weekdayCount = 0L;
 		Long weekendDayCount = 0L;
 		
-		startDate.setTime(this.actualCheckinDate);
-		endDate.setTime(this.actualCheckoutDate);
-		
-		for (Calendar date = startDate; !date.after(endDate); date.add(Calendar.DAY_OF_MONTH, 1)) {
-			int day = date.get(Calendar.DAY_OF_WEEK);
-			if(day == Calendar.SATURDAY && day == Calendar.SUNDAY) {
+		for (LocalDateTime date = startDate; !date.isAfter(endDate); date = date.plusDays(1)) {
+	        DayOfWeek dayOfWeek = date.getDayOfWeek();
+			if(dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY) {
 				weekendDayCount++;
 			} else {
 				weekdayCount++;
@@ -130,10 +127,12 @@ public class Reservation {
 		return new Long[] {weekdayCount, weekendDayCount};
 	}
 	
+	public boolean isCheckoutLate() {
+		return this.expectedCheckoutDate.isBefore(actualCheckoutDate);
+	}
+	
 	public boolean isActualCheckoutWeekendDay() {
-        Calendar calendar = Calendar.getInstance();
-		calendar.setTime(this.getActualCheckoutDate());
-		int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        return (dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY);
+		DayOfWeek dayOfWeek = this.getActualCheckoutDate().getDayOfWeek();
+        return (dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY);
 	}
 }

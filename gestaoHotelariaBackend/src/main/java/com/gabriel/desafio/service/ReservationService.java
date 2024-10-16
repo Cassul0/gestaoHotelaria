@@ -1,12 +1,13 @@
 package com.gabriel.desafio.service;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gabriel.desafio.model.Payment;
 import com.gabriel.desafio.model.Reservation;
 import com.gabriel.desafio.repository.ReservationRepository;
 
@@ -14,7 +15,6 @@ import com.gabriel.desafio.repository.ReservationRepository;
 public class ReservationService {
 
 	@Autowired private ReservationRepository reservationRepository;
-	@Autowired private PaymentService paymentService;
 	
 	public void saveReservation(Reservation reservation) {
 		reservationRepository.save(reservation);
@@ -28,20 +28,18 @@ public class ReservationService {
 		return reservationRepository.findAll();
 	}
 	
-	public String checkinReservation(Reservation reservation, Date checkinDate) {
-		if(reservation.getExpectedCheckinDate().after(checkinDate)) {
-			return "A data de checkin atual é anterior a data de checkin esperada";
+	public String checkinReservation(Reservation reservation, LocalDateTime checkinDate) {
+		if(reservation.getExpectedCheckinDate().isAfter(checkinDate)) {
+			return "A data de checkin atual é anterior a data de checkin esperada, tente novamente mais tarde!";
 		}
 		reservation.setActualCheckinDate(checkinDate);
 		this.saveReservation(reservation);
 		return "Checkin executado com sucesso";
 	}
 	
-	public String checkoutReservation(Reservation reservation, Date checkoutDate) {
-		reservation.setActualCheckinDate(checkoutDate);
+	public void checkoutReservation(Reservation reservation, LocalDateTime checkoutDate) {
+		reservation.setActualCheckoutDate(checkoutDate);
 		this.saveReservation(reservation);
-		paymentService.generateCheckoutPayment(reservation);
-		return "Checkout executado com sucesso";
 	}
 	
 	

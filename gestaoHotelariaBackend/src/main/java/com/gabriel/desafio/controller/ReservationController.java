@@ -1,6 +1,6 @@
 package com.gabriel.desafio.controller;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.gabriel.desafio.dto.ReservationDTO;
 import com.gabriel.desafio.model.Reservation;
+import com.gabriel.desafio.service.PaymentService;
 import com.gabriel.desafio.service.ReservationService;
 
 @RestController
@@ -23,6 +24,8 @@ import com.gabriel.desafio.service.ReservationService;
 public class ReservationController {
 
 	@Autowired ReservationService reservationService;
+	@Autowired private PaymentService paymentService;
+
 	
 	@PostMapping("/create")
 	public ResponseEntity<String> saveReservation(@RequestBody ReservationDTO reservationDTO){
@@ -35,21 +38,21 @@ public class ReservationController {
 	}
 	
 	@PostMapping("/checkinReservation")
-	public ResponseEntity<String> updateReservationCheckin(@PathVariable Long id, @PathVariable Date checkinDate){
-		Optional<Reservation> reservation = reservationService.getReservationById(id);
+	public ResponseEntity<String> updateReservationCheckin(@RequestBody ReservationDTO reservationDTO){
+		Optional<Reservation> reservation = reservationService.getReservationById(reservationDTO.getId());
 		if(reservation.isPresent()) {
-			reservationService.checkinReservation(reservation.get(), checkinDate);
-	        return ResponseEntity.status(HttpStatus.CREATED).body("Reserva atualizada com sucesso!"); 
+	        return ResponseEntity.status(HttpStatus.CREATED).body(reservationService.checkinReservation(reservation.get(), reservationDTO.getActualCheckinDate())); 
 		}
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocorreu um erro ao atualizar a reserva"); 
 	}
 	
-	@PostMapping("/checkinReservation")
-	public ResponseEntity<String> updateReservationCheckout(@PathVariable Long id, @PathVariable Date checkoutDate){
-		Optional<Reservation> reservation = reservationService.getReservationById(id);
+	@PostMapping("/checkoutReservation")
+	public ResponseEntity<String> updateReservationCheckout(@RequestBody ReservationDTO reservationDTO){
+		Optional<Reservation> reservation = reservationService.getReservationById(reservationDTO.getId());
 		if(reservation.isPresent()) {
-			reservationService.checkinReservation(reservation.get(), checkoutDate);
-	        return ResponseEntity.status(HttpStatus.CREATED).body("Reserva atualizada com sucesso!"); 
+			reservationService.checkoutReservation(reservation.get(), reservationDTO.getActualCheckoutDate());
+			reservation.get().setActualCheckoutDate(reservationDTO.getActualCheckoutDate());
+	        return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.generateCheckoutPayment(reservation.get()).toString()); 
 		}
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocorreu um erro ao atualizar a reserva"); 
 	}
