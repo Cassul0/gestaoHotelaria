@@ -1,0 +1,18 @@
+meta {
+  name: checkinReservation
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/api/reservation/checkinReservation
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id": 3,
+    "checkinDate": "2024-10-16T14:00:00"
+  }
+}

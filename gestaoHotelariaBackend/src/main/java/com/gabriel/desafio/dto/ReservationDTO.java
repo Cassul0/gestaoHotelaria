@@ -8,6 +8,7 @@ import com.gabriel.desafio.model.Reservation;
 
 public class ReservationDTO {
 
+	private Long id;
 	private Guest guest;
 	private Date expectedCheckinDate;
 	private Date expectedCheckoutDate;
@@ -17,6 +18,14 @@ public class ReservationDTO {
 	private Integer days;
 	private Boolean parkingSlot;
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Guest getGuest() {
 		return guest;
 	}

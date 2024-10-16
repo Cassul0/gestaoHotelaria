@@ -1,5 +1,7 @@
 package com.gabriel.desafio.model;
 
+import java.util.Calendar;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,6 +10,11 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Payment {
+	
+	public static final Double WEEK_DAILY_VALUE = 120.00;
+	public static final Double WEEKEND_DAILY_VALUE = 180.00;
+	public static final Double WEEKDAY_PARKING_VALUE = 15.00;
+	public static final Double WEEKEND_PARKING_VALUE = 20.00;
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +34,14 @@ public class Payment {
     	this.parkingFee = parkingFee;
     	this.lateCheckoutFee = lateCheckoutFee;
     	this.total = total;
+    }
+    
+    public Payment(Reservation reservation, Long[] dayCount, boolean isWeekend) {
+    	this.reservation = reservation;
+    	this.dailyValue = this.getDailyValueFromCheckoutReservation(dayCount);
+    	this.parkingFee = this.getParkingSlotFee(dayCount);
+    	this.lateCheckoutFee = this.getLateCheckoutFee(isWeekend);
+    	this.total = this.dailyValue + this.parkingFee + this.lateCheckoutFee;
     }
     
     public Long getId() {
@@ -77,4 +92,15 @@ public class Payment {
 		this.total = total;
 	}
     
+	public Double getDailyValueFromCheckoutReservation(Long[] dayCount ) {
+		return WEEK_DAILY_VALUE * dayCount[0] + WEEKEND_DAILY_VALUE * dayCount[1];
+	}
+	
+	public Double getParkingSlotFee(Long[] dayCount ) {
+		return WEEKDAY_PARKING_VALUE * dayCount[0] + WEEKEND_PARKING_VALUE * dayCount[1];
+	}
+	
+	public Double getLateCheckoutFee(boolean isWeekend) {
+		return isWeekend ? WEEKEND_DAILY_VALUE * 0.5 : WEEK_DAILY_VALUE * 0.5;
+	}
 }

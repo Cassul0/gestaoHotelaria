@@ -1,5 +1,6 @@
 package com.gabriel.desafio.model;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -109,5 +110,30 @@ public class Reservation {
 		this.parkingSlot = parkingSlot;
 	}
 	
+	public Long[] getDayCount() {
+		Calendar startDate = Calendar.getInstance();
+		Calendar endDate = Calendar.getInstance();
+		Long weekdayCount = 0L;
+		Long weekendDayCount = 0L;
+		
+		startDate.setTime(this.actualCheckinDate);
+		endDate.setTime(this.actualCheckoutDate);
+		
+		for (Calendar date = startDate; !date.after(endDate); date.add(Calendar.DAY_OF_MONTH, 1)) {
+			int day = date.get(Calendar.DAY_OF_WEEK);
+			if(day == Calendar.SATURDAY && day == Calendar.SUNDAY) {
+				weekendDayCount++;
+			} else {
+				weekdayCount++;
+			}
+		}
+		return new Long[] {weekdayCount, weekendDayCount};
+	}
 	
+	public boolean isActualCheckoutWeekendDay() {
+        Calendar calendar = Calendar.getInstance();
+		calendar.setTime(this.getActualCheckoutDate());
+		int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        return (dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY);
+	}
 }
