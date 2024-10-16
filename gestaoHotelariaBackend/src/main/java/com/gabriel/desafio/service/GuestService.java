@@ -38,7 +38,7 @@ public class GuestService {
 		return guestRepository.getGuestsStillAtTheHotel();
 	}
 
-	public List<Guest> getGuestsThatHaventCheckin() {
-		return guestRepository.getGuestsThatHaventCheckin();
+	public List<Guest> getGuestsThatHaventCheckedIn() {
+		return guestRepository.getGuestsThatHaventCheckedIn();
 	}
 }

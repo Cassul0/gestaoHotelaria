@@ -63,9 +63,9 @@ public class GuestController {
 		return ResponseEntity.ok(guestService.getGuestsStillAtTheHotel());
     }
     
-    @GetMapping("/findGuestsThatHaventCheckin")
-    public ResponseEntity<List<Guest>> getGuestsThatHaventCheckin(){
-		return ResponseEntity.ok(guestService.getGuestsThatHaventCheckin());
+    @GetMapping("/findGuestsThatHaventCheckedIn")
+    public ResponseEntity<List<Guest>> getGuestsThatHaventCheckedIn(){
+		return ResponseEntity.ok(guestService.getGuestsThatHaventCheckedIn());
     }
 	
 }
