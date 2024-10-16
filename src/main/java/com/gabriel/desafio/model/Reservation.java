@@ -1,6 +1,6 @@
 package com.gabriel.desafio.model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,26 +16,24 @@ public class Reservation {
 	private Long id;
 	@ManyToOne
 	private Guest guest;
-	private LocalDateTime expectedCheckinDate;
-	private LocalDateTime expectedCheckoutDate;
-	private LocalDateTime actualCheckinDate;
-	private LocalDateTime actualCheckoutDate;
+	private Date expectedCheckinDate;
+	private Date expectedCheckoutDate;
+	private Date actualCheckinDate;
+	private Date actualCheckoutDate;
 	private Double dailyValue;
-	private String status; 
 	private Integer days;
 	private Boolean parkingSlot;
 	
 	public Reservation() { }
 	
-	public Reservation(Guest guest, LocalDateTime expectedCheckinDate, LocalDateTime expectedCheckoutDate, LocalDateTime actualCheckinDate, 
-					   LocalDateTime actualCheckoutDate, Double dailyValue, String status, Integer days, Boolean parkingSlot) {
+	public Reservation(Guest guest, Date expectedCheckinDate, Date expectedCheckoutDate, Date actualCheckinDate, 
+					   Date actualCheckoutDate, Double dailyValue, Integer days, Boolean parkingSlot) {
 		this.guest = guest;
 		this.expectedCheckinDate = expectedCheckinDate;
 		this.expectedCheckoutDate = expectedCheckoutDate;
 		this.actualCheckinDate = actualCheckinDate;
 		this.actualCheckoutDate = actualCheckoutDate;
 		this.dailyValue = dailyValue;
-		this.status = status;
 		this.days = days;
 		this.parkingSlot = parkingSlot;
 	}
@@ -56,34 +54,34 @@ public class Reservation {
 		this.guest = guest;
 	}
 	
-	public LocalDateTime getExpectedCheckinDate() {
+	public Date getExpectedCheckinDate() {
 		return expectedCheckinDate;
 	}
 	
-	public void setExpectedCheckinDate(LocalDateTime expectedCheckinDate) {
+	public void setExpectedCheckinDate(Date expectedCheckinDate) {
 		this.expectedCheckinDate = expectedCheckinDate;
 	}
 	
-	public LocalDateTime getExpectedCheckoutDate() {
+	public Date getExpectedCheckoutDate() {
 		return expectedCheckoutDate;
 	}
 	
-	public void setExpectedCheckoutDate(LocalDateTime expectedCheckoutDate) {
+	public void setExpectedCheckoutDate(Date expectedCheckoutDate) {
 		this.expectedCheckoutDate = expectedCheckoutDate;
 	}
-	public LocalDateTime getActualCheckinDate() {
+	public Date getActualCheckinDate() {
 		return actualCheckinDate;
 	}
 	
-	public void setActualCheckinDate(LocalDateTime actualCheckinDate) {
+	public void setActualCheckinDate(Date actualCheckinDate) {
 		this.actualCheckinDate = actualCheckinDate;
 	}
 	
-	public LocalDateTime getActualCheckoutDate() {
+	public Date getActualCheckoutDate() {
 		return actualCheckoutDate;
 	}
 	
-	public void setActualCheckoutDate(LocalDateTime actualCheckoutDate) {
+	public void setActualCheckoutDate(Date actualCheckoutDate) {
 		this.actualCheckoutDate = actualCheckoutDate;
 	}
 	
@@ -93,14 +91,6 @@ public class Reservation {
 	
 	public void setDailyValue(Double dailyValue) {
 		this.dailyValue = dailyValue;
-	}
-	
-	public String getStatus() {
-		return status;
-	}
-	
-	public void setStatus(String status) {
-		this.status = status;
 	}
 	
 	public Integer getDays() {

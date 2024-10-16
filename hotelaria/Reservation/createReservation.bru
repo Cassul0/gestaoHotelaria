@@ -1,0 +1,30 @@
+meta {
+  name: createReservation
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/api/reservation/create
+  body: json
+  auth: none
+}
+
+body:json {
+  
+  {
+    "guest": {
+      "id":1,
+      "name": "mnateus",
+      "document": "123123123",
+      "phone": "1321321321"
+    },
+    "expectedCheckinDate": "2024-10-16T14:00:00",
+    "expectedCheckoutDate": "2024-10-18T12:00:00", 
+    "actualCheckinDate": null,
+    "actualCheckoutDate": null,
+    "dailyValue": "240",
+    "days": "2",
+    "parkingSlot": "false"
+  }
+}

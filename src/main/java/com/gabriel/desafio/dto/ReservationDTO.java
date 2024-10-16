@@ -1,5 +1,6 @@
 package com.gabriel.desafio.dto;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 import com.gabriel.desafio.model.Guest;
@@ -8,12 +9,11 @@ import com.gabriel.desafio.model.Reservation;
 public class ReservationDTO {
 
 	private Guest guest;
-	private LocalDateTime expectedCheckinDate;
-	private LocalDateTime expectedCheckoutDate;
-	private LocalDateTime actualCheckinDate;
-	private LocalDateTime actualCheckoutDate;
+	private Date expectedCheckinDate;
+	private Date expectedCheckoutDate;
+	private Date actualCheckinDate;
+	private Date actualCheckoutDate;
 	private Double dailyValue;
-	private String status; 
 	private Integer days;
 	private Boolean parkingSlot;
 	
@@ -25,34 +25,34 @@ public class ReservationDTO {
 		this.guest = guest;
 	}
 	
-	public LocalDateTime getExpectedCheckinDate() {
+	public Date getExpectedCheckinDate() {
 		return expectedCheckinDate;
 	}
 	
-	public void setExpectedCheckinDate(LocalDateTime expectedCheckinDate) {
+	public void setExpectedCheckinDate(Date expectedCheckinDate) {
 		this.expectedCheckinDate = expectedCheckinDate;
 	}
 	
-	public LocalDateTime getExpectedCheckoutDate() {
+	public Date getExpectedCheckoutDate() {
 		return expectedCheckoutDate;
 	}
 	
-	public void setExpectedCheckoutDate(LocalDateTime expectedCheckoutDate) {
+	public void setExpectedCheckoutDate(Date expectedCheckoutDate) {
 		this.expectedCheckoutDate = expectedCheckoutDate;
 	}
-	public LocalDateTime getActualCheckinDate() {
+	public Date getActualCheckinDate() {
 		return actualCheckinDate;
 	}
 	
-	public void setActualCheckinDate(LocalDateTime actualCheckinDate) {
+	public void setActualCheckinDate(Date actualCheckinDate) {
 		this.actualCheckinDate = actualCheckinDate;
 	}
 	
-	public LocalDateTime getActualCheckoutDate() {
+	public Date getActualCheckoutDate() {
 		return actualCheckoutDate;
 	}
 	
-	public void setActualCheckoutDate(LocalDateTime actualCheckoutDate) {
+	public void setActualCheckoutDate(Date actualCheckoutDate) {
 		this.actualCheckoutDate = actualCheckoutDate;
 	}
 	
@@ -62,14 +62,6 @@ public class ReservationDTO {
 	
 	public void setDailyValue(Double dailyValue) {
 		this.dailyValue = dailyValue;
-	}
-	
-	public String getStatus() {
-		return status;
-	}
-	
-	public void setStatus(String status) {
-		this.status = status;
 	}
 	
 	public Integer getDays() {
@@ -95,7 +87,6 @@ public class ReservationDTO {
 							   this.actualCheckinDate,
 							   this.actualCheckoutDate,
 							   this.dailyValue,
-							   this.status,
 							   this.days,
 							   this.parkingSlot);	
 	}

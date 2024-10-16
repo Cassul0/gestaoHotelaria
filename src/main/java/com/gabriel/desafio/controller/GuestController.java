@@ -1,5 +1,6 @@
 package com.gabriel.desafio.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +57,15 @@ public class GuestController {
         Optional<Guest> guest = guestService.getGuestByPhone(phone);
         return guest.isPresent() ? ResponseEntity.ok(guest) : ResponseEntity.notFound().build();
     }	
+    
+    @GetMapping("/findGuestsStillAtTheHotel")
+    public ResponseEntity<List<Guest>> getGuestsStillAtTheHotel(){
+		return ResponseEntity.ok(guestService.getGuestsStillAtTheHotel());
+    }
+    
+    @GetMapping("/findGuestsThatHaventCheckin")
+    public ResponseEntity<List<Guest>> getGuestsThatHaventCheckin(){
+		return ResponseEntity.ok(guestService.getGuestsThatHaventCheckin());
+    }
 	
 }

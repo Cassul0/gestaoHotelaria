@@ -1,5 +1,6 @@
 package com.gabriel.desafio.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,4 +34,11 @@ public class GuestService {
 		return guestRepository.findGuestByPhone(phone);
 	}
 
+	public List<Guest> getGuestsStillAtTheHotel() {
+		return guestRepository.getGuestsStillAtTheHotel();
+	}
+
+	public List<Guest> getGuestsThatHaventCheckin() {
+		return guestRepository.getGuestsThatHaventCheckin();
+	}
 }
