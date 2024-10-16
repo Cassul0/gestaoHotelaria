@@ -1,20 +1,12 @@
-package com.gabriel.desafio.model;
+package com.gabriel.desafio.dto;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import com.gabriel.desafio.model.Guest;
+import com.gabriel.desafio.model.Reservation;
 
-@Entity
-public class Reservation {
+public class ReservationDTO {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	@ManyToOne
 	private Guest guest;
 	private LocalDateTime expectedCheckinDate;
 	private LocalDateTime expectedCheckoutDate;
@@ -24,29 +16,6 @@ public class Reservation {
 	private String status; 
 	private Integer days;
 	private Boolean parkingSlot;
-	
-	public Reservation() { }
-	
-	public Reservation(Guest guest, LocalDateTime expectedCheckinDate, LocalDateTime expectedCheckoutDate, LocalDateTime actualCheckinDate, 
-					   LocalDateTime actualCheckoutDate, Double dailyValue, String status, Integer days, Boolean parkingSlot) {
-		this.guest = guest;
-		this.expectedCheckinDate = expectedCheckinDate;
-		this.expectedCheckoutDate = expectedCheckoutDate;
-		this.actualCheckinDate = actualCheckinDate;
-		this.actualCheckoutDate = actualCheckoutDate;
-		this.dailyValue = dailyValue;
-		this.status = status;
-		this.days = days;
-		this.parkingSlot = parkingSlot;
-	}
-	
-	public Long getId() {
-		return id;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
 	
 	public Guest getGuest() {
 		return guest;
@@ -119,5 +88,16 @@ public class Reservation {
 		this.parkingSlot = parkingSlot;
 	}
 	
+	public Reservation build() {
+		return new Reservation(this.guest,
+							   this.expectedCheckinDate,
+							   this.expectedCheckoutDate,
+							   this.actualCheckinDate,
+							   this.actualCheckoutDate,
+							   this.dailyValue,
+							   this.status,
+							   this.days,
+							   this.parkingSlot);	
+	}
 	
 }

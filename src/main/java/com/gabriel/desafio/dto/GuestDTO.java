@@ -1,28 +1,14 @@
-package com.gabriel.desafio.model;
+package com.gabriel.desafio.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.gabriel.desafio.model.Guest;
 
-@Entity
-public class Guest {
+public class GuestDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String document;
     private String phone;
 	
-    public Guest() { }
-    
-    public Guest(String name, String document, String phone) {
-    	this.name = name;
-    	this.document = document;
-    	this.phone = phone;
-    }
-    
     public Long getId() {
 		return id;
 	}
@@ -54,5 +40,10 @@ public class Guest {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-    
+	
+	public Guest build() {
+		return new Guest(this.name,
+						 this.document,
+						 this.phone);
+	}
 }

@@ -1,10 +1,10 @@
 package com.gabriel.desafio.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Payment {
@@ -12,17 +12,23 @@ public class Payment {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @OneToOne
-    private Reservation reserva;
+    private Reservation reservation;
+    private Double dailyValue;
+    private Double parkingFee;
+    private Double lateCheckoutFee;
+    private Double total;
 
-    private Double valorDiaria;
-    private Double taxaEstacionamento;
-    private Double taxaCheckoutAtrasado;
-    private Double valorTotal;
-
-    // Getters e Setters
-
+    public Payment() { }
+    
+    public Payment(Reservation reservation, Double dailyValue, Double parkingFee, Double lateCheckoutFee, Double total) {
+    	this.reservation = reservation;
+    	this.dailyValue = dailyValue;
+    	this.parkingFee = parkingFee;
+    	this.lateCheckoutFee = lateCheckoutFee;
+    	this.total = total;
+    }
+    
     public Long getId() {
         return id;
     }
@@ -31,43 +37,44 @@ public class Payment {
         this.id = id;
     }
 
-    public Reservation getReserva() {
-        return reserva;
-    }
+	public Reservation getReservation() {
+		return reservation;
+	}
 
-    public void setReserva(Reservation reserva) {
-        this.reserva = reserva;
-    }
+	public void setReservation(Reservation reservation) {
+		this.reservation = reservation;
+	}
 
-    public Double getValorDiaria() {
-        return valorDiaria;
-    }
+	public Double getDailyValue() {
+		return dailyValue;
+	}
 
-    public void setValorDiaria(Double valorDiaria) {
-        this.valorDiaria = valorDiaria;
-    }
+	public void setDailyValue(Double dailyValue) {
+		this.dailyValue = dailyValue;
+	}
 
-    public Double getTaxaEstacionamento() {
-        return taxaEstacionamento;
-    }
+	public Double getParkingFee() {
+		return parkingFee;
+	}
 
-    public void setTaxaEstacionamento(Double taxaEstacionamento) {
-        this.taxaEstacionamento = taxaEstacionamento;
-    }
+	public void setParkingFee(Double parkingFee) {
+		this.parkingFee = parkingFee;
+	}
 
-    public Double getTaxaCheckoutAtrasado() {
-        return taxaCheckoutAtrasado;
-    }
+	public Double getLateCheckoutFee() {
+		return lateCheckoutFee;
+	}
 
-    public void setTaxaCheckoutAtrasado(Double taxaCheckoutAtrasado) {
-        this.taxaCheckoutAtrasado = taxaCheckoutAtrasado;
-    }
+	public void setLateCheckoutFee(Double lateCheckoutFee) {
+		this.lateCheckoutFee = lateCheckoutFee;
+	}
 
-    public Double getValorTotal() {
-        return valorTotal;
-    }
+	public Double getTotal() {
+		return total;
+	}
 
-    public void setValorTotal(Double valorTotal) {
-        this.valorTotal = valorTotal;
-    }
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+    
 }
