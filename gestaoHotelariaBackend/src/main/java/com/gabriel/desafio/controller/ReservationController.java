@@ -59,6 +59,6 @@ public class ReservationController {
 	
 	@GetMapping("/getReservationList")
 	public ResponseEntity<List<Reservation>> getReservationList(){
-		return ResponseEntity.ok(reservationService.getReservationList());
+		return ResponseEntity.ok(reservationService.getReservationList().forEach(null));
 	}
 }

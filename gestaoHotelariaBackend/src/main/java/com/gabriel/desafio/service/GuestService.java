@@ -41,4 +41,8 @@ public class GuestService {
 	public List<Guest> getGuestsThatHaventCheckedIn() {
 		return guestRepository.getGuestsThatHaventCheckedIn();
 	}
+	
+	public List<Guest> getAllGuests(){
+		return guestRepository.findAll();
+	}
 }

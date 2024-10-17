@@ -13,7 +13,6 @@ public class ReservationDTO {
 	private LocalDateTime expectedCheckoutDate;
 	private LocalDateTime actualCheckinDate;
 	private LocalDateTime actualCheckoutDate;
-	private Double dailyValue;
 	private Integer days;
 	private Boolean parkingSlot;
 	
@@ -64,14 +63,6 @@ public class ReservationDTO {
 		this.actualCheckoutDate = actualCheckoutDate;
 	}
 	
-	public Double getDailyValue() {
-		return dailyValue;
-	}
-	
-	public void setDailyValue(Double dailyValue) {
-		this.dailyValue = dailyValue;
-	}
-	
 	public Integer getDays() {
 		return days;
 	}
@@ -94,7 +85,6 @@ public class ReservationDTO {
 							   this.expectedCheckoutDate,
 							   this.actualCheckinDate,
 							   this.actualCheckoutDate,
-							   this.dailyValue,
 							   this.days,
 							   this.parkingSlot);	
 	}

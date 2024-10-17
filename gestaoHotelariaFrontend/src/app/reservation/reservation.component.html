@@ -1,0 +1,43 @@
+<div>
+  <button mat-button (click)="getAllReservations()">Buscar todas as reservas</button>
+</div>
+
+<table mat-table [dataSource]="data" class="mat-elevation-z8">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="expectedCheckinDate">
+    <th mat-header-cell *matHeaderCellDef> Data esperada checkin </th>
+    <td mat-cell *matCellDef="let element"> {{element.expectedCheckinDate}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="expectedCheckoutDate">
+    <th mat-header-cell *matHeaderCellDef> Data esperada checkout </th>
+    <td mat-cell *matCellDef="let element"> {{element.expectedCheckoutDate}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actualCheckinDate">
+    <th mat-header-cell *matHeaderCellDef> Data real checkin </th>
+    <td mat-cell *matCellDef="let element"> {{element.actualCheckinDate}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actualCheckoutDate">
+    <th mat-header-cell *matHeaderCellDef> Data real checkout </th>
+    <td mat-cell *matCellDef="let element"> {{element.actualCheckoutDate}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="days">
+    <th mat-header-cell *matHeaderCellDef> Quantidade de dias </th>
+    <td mat-cell *matCellDef="let element"> {{element.days}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="parkingSlot">
+    <th mat-header-cell *matHeaderCellDef> Vaga de garagem? </th>
+    <td mat-cell *matCellDef="let element"> {{element.parkingSlot}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

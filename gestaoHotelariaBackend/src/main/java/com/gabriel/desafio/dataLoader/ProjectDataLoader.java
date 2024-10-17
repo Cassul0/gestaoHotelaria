@@ -32,9 +32,9 @@ public class ProjectDataLoader implements CommandLineRunner {
         
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         
-        Reservation reservation1 = new Reservation(guest1, LocalDateTime.parse("16/10/2024 14:00", dateTimeFormatter), LocalDateTime.parse("18/10/2024 12:00", dateTimeFormatter), LocalDateTime.parse("16/10/2024 14:05", dateTimeFormatter), LocalDateTime.parse("18/10/2024 11:30", dateTimeFormatter), 240.0, Integer.valueOf(2), Boolean.TRUE);
-        Reservation reservation2 = new Reservation(guest2, LocalDateTime.parse("20/10/2024 14:00", dateTimeFormatter), LocalDateTime.parse("22/10/2024 12:00", dateTimeFormatter), LocalDateTime.parse("20/10/2024 14:01", dateTimeFormatter), null, 300.0, Integer.valueOf(2), Boolean.TRUE);
-        Reservation reservation3 = new Reservation(guest3, LocalDateTime.parse("23/10/2024 14:00", dateTimeFormatter), LocalDateTime.parse("27/10/2024 12:00", dateTimeFormatter), null, null, 600.0, Integer.valueOf(4), Boolean.FALSE);
+        Reservation reservation1 = new Reservation(guest1, LocalDateTime.parse("16/10/2024 14:00", dateTimeFormatter), LocalDateTime.parse("18/10/2024 12:00", dateTimeFormatter), LocalDateTime.parse("16/10/2024 14:05", dateTimeFormatter), LocalDateTime.parse("18/10/2024 11:30", dateTimeFormatter), Integer.valueOf(2), Boolean.TRUE);
+        Reservation reservation2 = new Reservation(guest2, LocalDateTime.parse("20/10/2024 14:00", dateTimeFormatter), LocalDateTime.parse("22/10/2024 12:00", dateTimeFormatter), LocalDateTime.parse("20/10/2024 14:01", dateTimeFormatter), null, Integer.valueOf(2), Boolean.TRUE);
+        Reservation reservation3 = new Reservation(guest3, LocalDateTime.parse("23/10/2024 14:00", dateTimeFormatter), LocalDateTime.parse("27/10/2024 12:00", dateTimeFormatter), null, null, Integer.valueOf(4), Boolean.FALSE);
 
         reservationRepository.save(reservation1);
         reservationRepository.save(reservation2);

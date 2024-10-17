@@ -67,5 +67,10 @@ public class GuestController {
     public ResponseEntity<List<Guest>> getGuestsThatHaventCheckedIn(){
 		return ResponseEntity.ok(guestService.getGuestsThatHaventCheckedIn());
     }
+    
+    @GetMapping("/findAllGuests")
+    public ResponseEntity<List<Guest>> getAllGuests(){
+    	return ResponseEntity.ok(guestService.getAllGuests());
+    }
 	
 }

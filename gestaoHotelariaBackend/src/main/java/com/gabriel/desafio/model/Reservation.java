@@ -21,20 +21,18 @@ public class Reservation {
 	private LocalDateTime expectedCheckoutDate;
 	private LocalDateTime actualCheckinDate;
 	private LocalDateTime actualCheckoutDate;
-	private Double dailyValue;
 	private Integer days;
 	private Boolean parkingSlot;
 	
 	public Reservation() { }
 	
 	public Reservation(Guest guest, LocalDateTime expectedCheckinDate, LocalDateTime expectedCheckoutDate, LocalDateTime actualCheckinDate, 
-					   LocalDateTime actualCheckoutDate, Double dailyValue, Integer days, Boolean parkingSlot) {
+					   LocalDateTime actualCheckoutDate, Integer days, Boolean parkingSlot) {
 		this.guest = guest;
 		this.expectedCheckinDate = expectedCheckinDate;
 		this.expectedCheckoutDate = expectedCheckoutDate;
 		this.actualCheckinDate = actualCheckinDate;
 		this.actualCheckoutDate = actualCheckoutDate;
-		this.dailyValue = dailyValue;
 		this.days = days;
 		this.parkingSlot = parkingSlot;
 	}
@@ -84,14 +82,6 @@ public class Reservation {
 	
 	public void setActualCheckoutDate(LocalDateTime actualCheckoutDate) {
 		this.actualCheckoutDate = actualCheckoutDate;
-	}
-	
-	public Double getDailyValue() {
-		return dailyValue;
-	}
-	
-	public void setDailyValue(Double dailyValue) {
-		this.dailyValue = dailyValue;
 	}
 	
 	public Integer getDays() {

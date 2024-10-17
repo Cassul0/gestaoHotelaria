@@ -1,0 +1,29 @@
+<div>
+  <button mat-button (click)="getAllGuests()">Buscar todos os hóspedes</button>
+  <button mat-button (click)="getGuestsStillAtTheHotel()">Buscar hóspedes ainda no hotel</button>
+</div>
+
+<table mat-table [dataSource]="data" class="mat-elevation-z8">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nome </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="document">
+    <th mat-header-cell *matHeaderCellDef> Documento </th>
+    <td mat-cell *matCellDef="let element"> {{element.document}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="phone">
+    <th mat-header-cell *matHeaderCellDef> Telefone </th>
+    <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

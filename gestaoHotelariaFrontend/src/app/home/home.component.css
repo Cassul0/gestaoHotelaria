@@ -1,0 +1,23 @@
+.sidenav-container {
+  height: 100%;
+}
+
+mat-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+mat-sidenav-container {
+  margin-top: 64px; /* Altura da toolbar */
+}
+
+mat-sidenav {
+  width: 200px;
+}
+
+mat-sidenav-content {
+  margin-left: 200px; /* Largura da sidenav */
+}
