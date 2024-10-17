@@ -14,8 +14,8 @@ public class GuestService {
 	
     @Autowired private GuestRepository guestRepository;
 
-    public void saveGuest(Guest guest) {
-    	guestRepository.save(guest);
+    public Guest saveGuest(Guest guest) {
+    	return guestRepository.save(guest);
     }
     
 	public Optional<Guest> getGuestById(Long id) {

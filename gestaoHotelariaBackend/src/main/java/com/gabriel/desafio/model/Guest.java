@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.gabriel.desafio.dto.GuestDTO;
+
 @Entity
 public class Guest {
 
@@ -17,10 +19,24 @@ public class Guest {
 	
     public Guest() { }
     
+    public Guest(Long id, String name, String document, String phone) {
+    	this.id = id;
+    	this.name = name;
+    	this.document = document;
+    	this.phone = phone;
+    }
+    
     public Guest(String name, String document, String phone) {
     	this.name = name;
     	this.document = document;
     	this.phone = phone;
+    }
+    
+    public Guest(Guest guest) {
+    	this.id = guest.getId();
+    	this.name = guest.getName();
+    	this.document = guest.getDocument();
+    	this.phone = guest.getPhone();
     }
     
     public Long getId() {
@@ -54,5 +70,5 @@ public class Guest {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-    
+
 }

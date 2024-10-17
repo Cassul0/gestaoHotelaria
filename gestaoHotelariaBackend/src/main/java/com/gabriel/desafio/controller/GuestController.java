@@ -27,9 +27,9 @@ public class GuestController {
 	public ResponseEntity<String> saveGuest(@RequestBody GuestDTO guest){
 		try {
 			guestService.saveGuest(guest.build());
-	        return ResponseEntity.status(HttpStatus.CREATED).body("Guest created successfully!"); 
+	        return ResponseEntity.status(HttpStatus.CREATED).body("Hospede criado com sucesso!"); 
 	    } catch (Exception e) {
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating guest: " + e.getMessage()); 
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao criar hospede: " + e.getMessage()); 
 	    }
 	}
 	

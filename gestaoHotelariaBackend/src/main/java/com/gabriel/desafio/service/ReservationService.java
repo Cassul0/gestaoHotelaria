@@ -10,14 +10,15 @@ import org.springframework.stereotype.Service;
 import com.gabriel.desafio.model.Payment;
 import com.gabriel.desafio.model.Reservation;
 import com.gabriel.desafio.repository.ReservationRepository;
+import com.gabriel.desafio.restException.ReservationRestException;
 
 @Service
 public class ReservationService {
 
 	@Autowired private ReservationRepository reservationRepository;
 	
-	public void saveReservation(Reservation reservation) {
-		reservationRepository.save(reservation);
+	public Reservation saveReservation(Reservation reservation) {
+		return reservationRepository.save(reservation);
 	}
 	
 	public Optional<Reservation> getReservationById(Long id) {
@@ -28,9 +29,9 @@ public class ReservationService {
 		return reservationRepository.findAll();
 	}
 	
-	public String checkinReservation(Reservation reservation, LocalDateTime checkinDate) {
+	public String checkinReservation(Reservation reservation, LocalDateTime checkinDate) throws ReservationRestException {
 		if(reservation.getExpectedCheckinDate().isAfter(checkinDate)) {
-			return "A data de checkin atual é anterior a data de checkin esperada, tente novamente mais tarde!";
+			throw new ReservationRestException("A data de checkin atual é anterior a data de checkin esperada, tente novamente mais tarde!");
 		}
 		reservation.setActualCheckinDate(checkinDate);
 		this.saveReservation(reservation);

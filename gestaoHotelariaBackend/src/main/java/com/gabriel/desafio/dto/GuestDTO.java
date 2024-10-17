@@ -8,8 +8,16 @@ public class GuestDTO {
     private String name;
     private String document;
     private String phone;
-	
-    public Long getId() {
+    
+    public GuestDTO(Long id, String name, String document, String phone) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.document = document;
+		this.phone = phone;
+	}
+
+	public Long getId() {
 		return id;
 	}
     
@@ -46,4 +54,19 @@ public class GuestDTO {
 						 this.document,
 						 this.phone);
 	}
+
+	public static GuestDTO build(Guest guest) {
+		return new GuestDTO(guest.getId(),
+						    guest.getName(),
+						    guest.getDocument(),
+						    guest.getPhone());
+	}
+
+	public static Guest build(GuestDTO guest) {
+		return new Guest(guest.getId(),
+					     guest.getName(),
+					     guest.getDocument(),
+					     guest.getPhone());
+	}
+	
 }

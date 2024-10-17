@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -12,6 +12,14 @@ export class ReservationService {
 
   getAllReservations(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}getReservationList`);
+  }
+
+  updateCheckinReservation(reservationId: number, data: Date): Observable<any>{
+    const body = {
+      id: reservationId,
+      actualCheckinDate: data.toISOString()
+    };
+    return this.http.post<any>(`${this.apiUrl}checkinReservation`, body);
   }
 
 }

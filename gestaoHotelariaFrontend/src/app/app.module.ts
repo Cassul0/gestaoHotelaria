@@ -4,7 +4,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { GuestModule } from './guest/guest.module';
 import { HttpClientModule } from '@angular/common/http';
-//import { provideAnimationsAsync } from '@angular/platform-browser/animations/async'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
@@ -14,13 +13,22 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatNavList } from '@angular/material/list';
 import { LayoutComponent } from './layout/layout.component';
 import { ReservationComponent } from './reservation/reservation.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DateModalComponent } from './date-modal/date-modal.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LayoutComponent,
-    ReservationComponent
+    ReservationComponent,
+    DateModalComponent
   ],
   imports: [
     BrowserModule,
@@ -32,10 +40,14 @@ import { ReservationComponent } from './reservation/reservation.component';
     MatTableModule,
     MatSidenavModule,
     MatToolbarModule,
-    MatNavList
-  ],
-  providers: [
-    //provideAnimationsAsync()
+    MatNavList,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   bootstrap: [AppComponent]
 })

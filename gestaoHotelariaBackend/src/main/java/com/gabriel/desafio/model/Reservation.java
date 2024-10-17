@@ -9,7 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties({"getDayCount", "isCheckoutLate", "isActualCheckoutWeekendDay"})
 public class Reservation {
 
 	@Id
@@ -26,6 +29,18 @@ public class Reservation {
 	
 	public Reservation() { }
 	
+	public Reservation(Long id, Guest guest, LocalDateTime expectedCheckinDate, LocalDateTime expectedCheckoutDate, LocalDateTime actualCheckinDate, 
+					   LocalDateTime actualCheckoutDate, Integer days, Boolean parkingSlot) {
+		this.id = id;
+		this.guest = guest;
+		this.expectedCheckinDate = expectedCheckinDate;
+		this.expectedCheckoutDate = expectedCheckoutDate;
+		this.actualCheckinDate = actualCheckinDate;
+		this.actualCheckoutDate = actualCheckoutDate;
+		this.days = days;
+		this.parkingSlot = parkingSlot;
+	}
+	
 	public Reservation(Guest guest, LocalDateTime expectedCheckinDate, LocalDateTime expectedCheckoutDate, LocalDateTime actualCheckinDate, 
 					   LocalDateTime actualCheckoutDate, Integer days, Boolean parkingSlot) {
 		this.guest = guest;
@@ -36,7 +51,7 @@ public class Reservation {
 		this.days = days;
 		this.parkingSlot = parkingSlot;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}

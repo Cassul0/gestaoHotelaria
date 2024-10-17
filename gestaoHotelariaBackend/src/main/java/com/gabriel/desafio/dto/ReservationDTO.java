@@ -1,6 +1,8 @@
 package com.gabriel.desafio.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.gabriel.desafio.model.Guest;
 import com.gabriel.desafio.model.Reservation;
@@ -8,13 +10,28 @@ import com.gabriel.desafio.model.Reservation;
 public class ReservationDTO {
 
 	private Long id;
-	private Guest guest;
+	private GuestDTO guest;
 	private LocalDateTime expectedCheckinDate;
 	private LocalDateTime expectedCheckoutDate;
 	private LocalDateTime actualCheckinDate;
 	private LocalDateTime actualCheckoutDate;
 	private Integer days;
-	private Boolean parkingSlot;
+	private String parkingSlot;
+	
+	public ReservationDTO(Long id, GuestDTO guest, LocalDateTime expectedCheckinDate, LocalDateTime expectedCheckoutDate,
+			LocalDateTime actualCheckinDate, LocalDateTime actualCheckoutDate, Integer days, Boolean parkingSlot) {
+		super();
+		this.id = id;
+		this.guest = guest;
+		this.expectedCheckinDate = expectedCheckinDate;
+		this.expectedCheckoutDate = expectedCheckoutDate;
+		this.actualCheckinDate = actualCheckinDate;
+		this.actualCheckoutDate = actualCheckoutDate;
+		this.days = days;
+		this.parkingSlot = parkingSlot ? "Sim" : "Não" ;
+	}
+	
+	public ReservationDTO() {}
 	
 	public Long getId() {
 		return id;
@@ -24,11 +41,11 @@ public class ReservationDTO {
 		this.id = id;
 	}
 
-	public Guest getGuest() {
+	public GuestDTO getGuest() {
 		return guest;
 	}
 	
-	public void setGuest(Guest guest) {
+	public void setGuest(GuestDTO guest) {
 		this.guest = guest;
 	}
 	
@@ -71,22 +88,39 @@ public class ReservationDTO {
 		this.days = days;
 	}
 
-	public Boolean getParkingSlot() {
+	public String getParkingSlot() {
 		return parkingSlot;
 	}
 
-	public void setParkingSlot(Boolean parkingSlot) {
+	public void setParkingSlot(String parkingSlot) {
 		this.parkingSlot = parkingSlot;
 	}
 	
+	public static List<ReservationDTO> build(List<Reservation> reservationList) {
+	    return reservationList.stream()
+	            .map(reservation -> new ReservationDTO(
+	                reservation.getId(),
+	                GuestDTO.build(reservation.getGuest()),
+	                reservation.getExpectedCheckinDate(),
+	                reservation.getExpectedCheckoutDate(),
+	                reservation.getActualCheckinDate(),
+	                reservation.getActualCheckoutDate(),
+	                reservation.getDays(),
+	                reservation.getParkingSlot()
+	                )
+	            )
+	            .collect(Collectors.toList());	}
+
 	public Reservation build() {
-		return new Reservation(this.guest,
-							   this.expectedCheckinDate,
-							   this.expectedCheckoutDate,
-							   this.actualCheckinDate,
-							   this.actualCheckoutDate,
-							   this.days,
-							   this.parkingSlot);	
+		return new Reservation(this.getId(),
+                GuestDTO.build(this.getGuest()),
+                this.getExpectedCheckinDate(),
+                this.getExpectedCheckoutDate(),
+                this.getActualCheckinDate(),
+                this.getActualCheckoutDate(),
+                this.getDays(),
+                this.getParkingSlot().equals("Sim") ? true : false
+                );
 	}
 	
 }

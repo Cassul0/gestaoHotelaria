@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Informe a data e hora</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput [matDatetimePicker]="picker" placeholder="Escolha a data e hora" [(ngModel)]="data">
+    <mat-datetime-picker-toggle matSuffix [for]="picker"></mat-datetime-picker-toggle>
+    <mat-datetime-picker #picker></mat-datetime-picker>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-button (click)="onConfirm()">Confirmar</button>
+</div>

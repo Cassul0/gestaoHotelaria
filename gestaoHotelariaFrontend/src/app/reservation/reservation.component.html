@@ -13,14 +13,14 @@
     <td mat-cell *matCellDef="let element"> {{element.expectedCheckinDate}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="expectedCheckoutDate">
-    <th mat-header-cell *matHeaderCellDef> Data esperada checkout </th>
-    <td mat-cell *matCellDef="let element"> {{element.expectedCheckoutDate}} </td>
-  </ng-container>
-
   <ng-container matColumnDef="actualCheckinDate">
     <th mat-header-cell *matHeaderCellDef> Data real checkin </th>
     <td mat-cell *matCellDef="let element"> {{element.actualCheckinDate}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="expectedCheckoutDate">
+    <th mat-header-cell *matHeaderCellDef> Data esperada checkout </th>
+    <td mat-cell *matCellDef="let element"> {{element.expectedCheckoutDate}} </td>
   </ng-container>
 
   <ng-container matColumnDef="actualCheckoutDate">
@@ -36,6 +36,14 @@
   <ng-container matColumnDef="parkingSlot">
     <th mat-header-cell *matHeaderCellDef> Vaga de garagem? </th>
     <td mat-cell *matCellDef="let element"> {{element.parkingSlot}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Ações </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button *ngIf="!element.actualCheckinDate" (click)="onCheckinClick(element.id)">Check-in</button>
+      <button mat-button *ngIf="element.actualCheckinDate && !element.actualCheckoutDate" (click)="onCheckoutClick(element.id)">Check-out</button>
+    </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
