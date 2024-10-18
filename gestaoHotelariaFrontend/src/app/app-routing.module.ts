@@ -6,6 +6,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { GuestRegistrationComponent } from './guest-registration/guest-registration.component';
 import { PaymentListComponent } from './payment/payment-list/payment-list.component';
+import { CreateReservationComponent } from './reservation/create-reservation/create-reservation.component';
 
 const routes: Routes = [
   { path: '',
@@ -14,6 +15,7 @@ const routes: Routes = [
       { path: '', component: HomeComponent },
       { path: 'guests', component: GuestComponent },
       { path: 'reservation', component: ReservationComponent },
+      { path: 'create-reservation', component: CreateReservationComponent },
       { path: 'guest-registration', component: GuestRegistrationComponent},
       { path: 'payment-list', component: PaymentListComponent }
     ]

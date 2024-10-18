@@ -31,13 +31,16 @@ public class ReservationController {
 
 	
 	@PostMapping("/create")
-	public ResponseEntity<String> saveReservation(@RequestBody ReservationDTO reservationDTO){
+	public ResponseEntity<Map<String, String>>saveReservation(@RequestBody ReservationDTO reservationDTO){
+		Map<String, String> response = new HashMap<>();
 		try {
 			reservationService.saveReservation(reservationDTO.build());
-	        return ResponseEntity.status(HttpStatus.CREATED).body("Reserva criada com sucesso!"); 
+			response.put("message", "Reserva criada com sucesso!");
+	        return ResponseEntity.status(HttpStatus.CREATED).body(response); 
 		} catch(Exception e) {
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao criar a reserva: " + e.getMessage()); 
-		}
+			response.put("message", e.getMessage());
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
 	}
 	
 	@PostMapping("/checkinReservation")

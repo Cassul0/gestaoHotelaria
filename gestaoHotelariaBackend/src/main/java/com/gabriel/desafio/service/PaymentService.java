@@ -23,7 +23,7 @@ public class PaymentService {
 	}
 	
 	public Payment generateCheckoutPayment(Reservation reservation) {
-		Payment payment = new Payment(reservation, reservation.getDayCount(), reservation.isCheckoutLate(), reservation.isActualCheckoutWeekendDay());
+		Payment payment = new Payment(reservation, reservation.getActualDayCount(), reservation.isCheckoutLate(), reservation.isActualCheckoutWeekendDay());
 		
 		this.savePayment(payment);
 		

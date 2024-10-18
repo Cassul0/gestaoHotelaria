@@ -8,6 +8,11 @@
     <td mat-cell *matCellDef="let element"> {{element.id}} </td>
   </ng-container>
 
+  <ng-container matColumnDef="guest">
+    <th mat-header-cell *matHeaderCellDef> Hóspede </th>
+    <td mat-cell *matCellDef="let element"> {{element.guest.name}} </td>
+  </ng-container>
+
   <ng-container matColumnDef="expectedCheckinDate">
     <th mat-header-cell *matHeaderCellDef> Data esperada checkin </th>
     <td mat-cell *matCellDef="let element"> {{element.expectedCheckinDate}} </td>

@@ -14,18 +14,22 @@ export class ReservationService {
     return this.http.get<any>(`${this.apiUrl}getReservationList`);
   }
 
-  updateCheckinReservation(id: number, actualCheckinDate: Date): Observable<any> {
+  createReservation(reservation: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}create`, reservation);
+  }
+
+  updateCheckinReservation(id: number, actualCheckinDate: string): Observable<any> {
     const body = {
       id: id,
-      actualCheckinDate: actualCheckinDate.toISOString()
+      actualCheckinDate: actualCheckinDate
     };
     return this.http.post<any>(`${this.apiUrl}checkinReservation`, body);
   }
 
-  updateCheckoutReservation(id: number, actualCheckoutDate: Date): Observable<any> {
+  updateCheckoutReservation(id: number, actualCheckoutDate: string): Observable<any> {
     const body = {
       id: id,
-      actualCheckoutDate: actualCheckoutDate.toISOString()
+      actualCheckoutDate: actualCheckoutDate
     };
     return this.http.post<any>(`${this.apiUrl}checkoutReservation`, body);
   }

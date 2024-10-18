@@ -18,6 +18,7 @@ public class ReservationService {
 	@Autowired private ReservationRepository reservationRepository;
 	
 	public Reservation saveReservation(Reservation reservation) {
+		reservation.setDays(reservation.getDayCount());
 		return reservationRepository.save(reservation);
 	}
 	
@@ -41,7 +42,7 @@ public class ReservationService {
 	public String checkoutReservation(Reservation reservation, LocalDateTime checkoutDate) {
 		reservation.setActualCheckoutDate(checkoutDate);
 		this.saveReservation(reservation);
-		return "Checkin executado com sucesso";
+		return "Checkout executado com sucesso";
 	}
 	
 	

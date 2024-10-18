@@ -22,6 +22,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GuestRegistrationComponent } from './guest-registration/guest-registration.component';
 import { PaymentModule } from './payment/payment.module';
+import { MatSelectModule } from '@angular/material/select';
+import { CreateReservationComponent } from './reservation/create-reservation/create-reservation.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { PaymentModule } from './payment/payment.module';
     LayoutComponent,
     ReservationComponent,
     DateModalComponent,
-    GuestRegistrationComponent
+    GuestRegistrationComponent,
+    CreateReservationComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +53,7 @@ import { PaymentModule } from './payment/payment.module';
     MatNativeDateModule,
     FormsModule,
     ReactiveFormsModule,
+    MatSelectModule,
     PaymentModule
   ],
   bootstrap: [AppComponent],

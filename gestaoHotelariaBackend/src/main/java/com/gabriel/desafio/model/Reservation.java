@@ -115,7 +115,7 @@ public class Reservation {
 		this.parkingSlot = parkingSlot;
 	}
 	
-	public Long[] getDayCount() {
+	public Long[] getActualDayCount() {
 		LocalDateTime startDate = this.actualCheckinDate;
 		LocalDateTime endDate = this.actualCheckoutDate;
 		Long weekdayCount = 0L;
@@ -139,5 +139,16 @@ public class Reservation {
 	public boolean isActualCheckoutWeekendDay() {
 		DayOfWeek dayOfWeek = this.getActualCheckoutDate().getDayOfWeek();
         return (dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY);
+	}
+	
+	public Integer getDayCount() {
+		LocalDateTime startDate = this.expectedCheckinDate;
+		LocalDateTime endDate = this.expectedCheckoutDate;
+		Integer dayCount = 0;
+		
+		for (LocalDateTime date = startDate; !date.isAfter(endDate); date = date.plusDays(1)) {
+			dayCount++;
+		}
+		return dayCount;
 	}
 }

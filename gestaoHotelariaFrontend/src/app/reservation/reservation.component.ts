@@ -12,6 +12,7 @@ import { PaymentModalComponent } from '../payment/payment-modal/payment-modal.co
 })
 export class ReservationComponent {
   displayedColumns: string[] = ['id',
+                                'guest',
                                 'expectedCheckinDate',
                                 'actualCheckinDate',
                                 'expectedCheckoutDate',
@@ -56,7 +57,8 @@ export class ReservationComponent {
   }
 
   realizarCheckin(reservationId: number, data: Date): void {
-    this.reservationService.updateCheckinReservation(reservationId, data).subscribe(response => {
+    const localDate = new Date(data.getTime() - (data.getTimezoneOffset() * 60000)).toISOString();
+    this.reservationService.updateCheckinReservation(reservationId, localDate).subscribe(response => {
       this.showSnackbar(response.message || response);
     }, error => {
       this.showSnackbar(error.error.message || 'Erro ao realizar check-in');
@@ -64,7 +66,8 @@ export class ReservationComponent {
   }
 
   realizarCheckout(reservationId: number, data: Date): void {
-    this.reservationService.updateCheckoutReservation(reservationId, data).subscribe(response => {
+    const localDate = new Date(data.getTime() - (data.getTimezoneOffset() * 60000)).toISOString();
+    this.reservationService.updateCheckoutReservation(reservationId, localDate).subscribe(response => {
       if (response.payment) {
         this.dialog.open(PaymentModalComponent, {
           data: response.payment

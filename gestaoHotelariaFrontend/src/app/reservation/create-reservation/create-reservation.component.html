@@ -1,0 +1,29 @@
+<div class="reservation-registration-form">
+  <h2>Cadastro de Reserva</h2>
+  <form (ngSubmit)="onSubmit(reservationForm)" #reservationForm="ngForm">
+    <mat-form-field>
+      <mat-label>Hóspede</mat-label>
+      <mat-select [(ngModel)]="reservation.guest" name="guest" required>
+        <mat-option *ngFor="let guest of guests" [value]="guest">{{ guest.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Data Esperada de Check-in" name="expectedCheckinDate" [(ngModel)]="reservation.expectedCheckinDate" type="datetime-local" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Data Esperada de Check-out" name="expectedCheckoutDate" [(ngModel)]="reservation.expectedCheckoutDate" type="datetime-local" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Vaga de Garagem</mat-label>
+      <mat-select [(ngModel)]="reservation.parkingSlot" name="parkingSlot" required>
+        <mat-option [value]="true">Sim</mat-option>
+        <mat-option [value]="false">Não</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="!reservationForm.form.valid">Cadastrar Reserva</button>
+  </form>
+</div>
