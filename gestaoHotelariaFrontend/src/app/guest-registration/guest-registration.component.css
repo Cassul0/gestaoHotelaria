@@ -1,0 +1,13 @@
+.guest-registration-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+button {
+  margin-top: 20px;
+  width: 100%;
+}

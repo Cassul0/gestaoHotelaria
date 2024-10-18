@@ -1,18 +1,18 @@
 <div class="guest-registration-form">
   <h2>Cadastro de Hóspede</h2>
   <form (ngSubmit)="onSubmit(guestForm)" #guestForm="ngForm">
-    <mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Nome</mat-label>
       <input matInput placeholder="Nome" name="name" [(ngModel)]="guest.name" required>
     </mat-form-field>
-
-    <mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Documento</mat-label>
       <input matInput placeholder="Documento" name="document" [(ngModel)]="guest.document" required>
     </mat-form-field>
-
-    <mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Telefone</mat-label>
       <input matInput placeholder="Telefone" name="phone" [(ngModel)]="guest.phone" required>
     </mat-form-field>
-
     <button mat-raised-button color="primary" type="submit" [disabled]="!guestForm.form.valid">Cadastrar</button>
   </form>
 </div>

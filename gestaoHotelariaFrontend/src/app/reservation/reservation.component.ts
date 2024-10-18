@@ -19,7 +19,7 @@ export class ReservationComponent {
                                 'actualCheckoutDate',
                                 'days',
                                 'parkingSlot',
-                                'actions'];
+                                'actions' ];
   data: any;
 
   constructor(private reservationService: ReservationService, public dialog: MatDialog, private snackBar: MatSnackBar) { }
