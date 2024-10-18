@@ -11,7 +11,18 @@ public class PaymentDTO {
     private Double lateCheckoutFee;
     private Double total;
 
-    public Reservation getReservation() {
+    public PaymentDTO() { }
+    
+    public PaymentDTO(Payment payment) {
+		super();
+		this.reservation = payment.getReservation();
+		this.dailyValue = payment.getDailyValue();
+		this.parkingFee = payment.getParkingFee();
+		this.lateCheckoutFee = payment.getParkingFee();
+		this.total = payment.getTotal();
+	}
+
+	public Reservation getReservation() {
         return reservation;
     }
 

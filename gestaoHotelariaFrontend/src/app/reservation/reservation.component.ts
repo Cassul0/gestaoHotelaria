@@ -3,6 +3,7 @@ import { ReservationService } from './reservation.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DateModalComponent } from '../date-modal/date-modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { PaymentModalComponent } from '../payment/payment-modal/payment-modal.component';  // Novo caminho
 
 @Component({
   selector: 'app-reservation',
@@ -63,7 +64,17 @@ export class ReservationComponent {
   }
 
   realizarCheckout(reservationId: number, data: Date): void {
-    console.log('Realizando check-out para a reserva:', reservationId);
+    this.reservationService.updateCheckoutReservation(reservationId, data).subscribe(response => {
+      if (response.payment) {
+        this.dialog.open(PaymentModalComponent, {
+          data: response.payment
+        });
+      }
+      this.showSnackbar(response.message);
+    }, error => {
+      console.error('Erro ao realizar check-out', error);
+      this.showSnackbar(error.error.message || 'Erro ao realizar check-out');
+    });
   }
 
   showSnackbar(message: string): void {

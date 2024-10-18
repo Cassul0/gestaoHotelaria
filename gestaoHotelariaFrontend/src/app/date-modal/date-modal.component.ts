@@ -4,10 +4,9 @@ import { MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-date-modal',
   templateUrl: './date-modal.component.html',
-  styleUrl: './date-modal.component.css'
 })
 export class DateModalComponent {
-  data: Date | null = null;
+  data: string | null = null;
 
   constructor(public dialogRef: MatDialogRef<DateModalComponent>) {}
 
@@ -16,7 +15,7 @@ export class DateModalComponent {
   }
 
   onConfirm(): void {
-    this.dialogRef.close(this.data);
+    const date = this.data ? new Date(this.data) : null;
+    this.dialogRef.close(date);
   }
-
 }

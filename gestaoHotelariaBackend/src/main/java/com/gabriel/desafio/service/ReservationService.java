@@ -38,9 +38,10 @@ public class ReservationService {
 		return "Checkin executado com sucesso";
 	}
 	
-	public void checkoutReservation(Reservation reservation, LocalDateTime checkoutDate) {
+	public String checkoutReservation(Reservation reservation, LocalDateTime checkoutDate) {
 		reservation.setActualCheckoutDate(checkoutDate);
 		this.saveReservation(reservation);
+		return "Checkin executado com sucesso";
 	}
 	
 	

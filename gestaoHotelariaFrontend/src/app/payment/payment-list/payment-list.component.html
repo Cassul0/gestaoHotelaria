@@ -1,0 +1,37 @@
+<div>
+  <h2>Lista de Pagamentos</h2>
+  <table mat-table [dataSource]="data" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="reservationId">
+      <th mat-header-cell *matHeaderCellDef> ID da Reserva </th>
+      <td mat-cell *matCellDef="let element"> {{element.reservation.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dailyValue">
+      <th mat-header-cell *matHeaderCellDef> Valor da Diária </th>
+      <td mat-cell *matCellDef="let element"> {{element.dailyValue}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="parkingFee">
+      <th mat-header-cell *matHeaderCellDef> Taxa de Estacionamento </th>
+      <td mat-cell *matCellDef="let element"> {{element.parkingFee}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lateCheckoutFee">
+      <th mat-header-cell *matHeaderCellDef> Taxa de Checkout Tardio </th>
+      <td mat-cell *matCellDef="let element"> {{element.lateCheckoutFee}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="total">
+      <th mat-header-cell *matHeaderCellDef> Valor Total </th>
+      <td mat-cell *matCellDef="let element"> {{element.total}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

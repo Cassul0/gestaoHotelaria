@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Informações de Pagamento</h1>
+<div mat-dialog-content>
+  <p>Valor da Diária: {{ data.dailyValue }}</p>
+  <p>Taxa de Estacionamento: {{ data.parkingFee }}</p>
+  <p>Taxa de Checkout Tardio: {{ data.lateCheckoutFee }}</p>
+  <p>Valor Total: {{ data.total }}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClose()">Fechar</button>
+</div>

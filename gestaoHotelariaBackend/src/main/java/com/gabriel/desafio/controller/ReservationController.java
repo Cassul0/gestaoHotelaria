@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gabriel.desafio.dto.PaymentDTO;
 import com.gabriel.desafio.dto.ReservationDTO;
+import com.gabriel.desafio.model.Payment;
 import com.gabriel.desafio.model.Reservation;
 import com.gabriel.desafio.restException.ReservationRestException;
 import com.gabriel.desafio.service.PaymentService;
@@ -58,14 +60,25 @@ public class ReservationController {
 	
 	
 	@PostMapping("/checkoutReservation")
-	public ResponseEntity<String> updateReservationCheckout(@RequestBody ReservationDTO reservationDTO){
-		Optional<Reservation> reservation = reservationService.getReservationById(reservationDTO.getId());
-		if(reservation.isPresent()) {
-			reservationService.checkoutReservation(reservation.get(), reservationDTO.getActualCheckoutDate());
-			reservation.get().setActualCheckoutDate(reservationDTO.getActualCheckoutDate());
-	        return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.generateCheckoutPayment(reservation.get()).toString()); 
-		}
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocorreu um erro ao atualizar a reserva"); 
+	public ResponseEntity<Map<String, Object>> updateReservationCheckout(@RequestBody ReservationDTO reservationDTO){
+	    Map<String, Object> response = new HashMap<>();
+	    try {
+			Optional<Reservation> reservation = reservationService.getReservationById(reservationDTO.getId());
+			if(reservation.isPresent()) {
+				String message = reservationService.checkoutReservation(reservation.get(), reservationDTO.getActualCheckoutDate());
+				reservation.get().setActualCheckoutDate(reservationDTO.getActualCheckoutDate());
+				Payment payment = paymentService.generateCheckoutPayment(reservation.get());
+				response.put("message", message);
+				response.put("payment", new PaymentDTO(payment));
+	            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+			} else {
+				response.put("message", "Ocorreu um erro ao realizar o checkout");
+	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+			}
+	    }catch(Exception e) {
+	    	response.put("message", "Ocorreu um erro inesperado!");
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+	    }
 	}
 	
 	@GetMapping("/getReservationList")

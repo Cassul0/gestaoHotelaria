@@ -1,5 +1,7 @@
 package com.gabriel.desafio.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,10 @@ public class PaymentService {
 	
 	public void savePayment(Payment payment) {
 		paymentRepository.save(payment);
+	}
+	
+	public List<Payment> getAllPayments(){
+		return paymentRepository.findAll();
 	}
 	
 	public Payment generateCheckoutPayment(Reservation reservation) {

@@ -1,6 +1,8 @@
 package com.gabriel.desafio.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +26,15 @@ public class GuestController {
 	@Autowired GuestService guestService;
 	
 	@PostMapping("/create")
-	public ResponseEntity<String> saveGuest(@RequestBody GuestDTO guest){
+	public ResponseEntity<Map<String, String>> saveGuest(@RequestBody GuestDTO guest){
+	    Map<String, String> response = new HashMap<>();
 		try {
 			guestService.saveGuest(guest.build());
-	        return ResponseEntity.status(HttpStatus.CREATED).body("Hospede criado com sucesso!"); 
+			response.put("message", "Hospede criado com sucesso!");
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	    } catch (Exception e) {
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao criar hospede: " + e.getMessage()); 
+	    	response.put("message", "Ocorreu um erro inesperado!");
+		    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);	    
 	    }
 	}
 	
